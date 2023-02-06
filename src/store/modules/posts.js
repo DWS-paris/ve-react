@@ -1,5 +1,5 @@
 // Define and export
-export default function( state = null, action ){
+export default function( state, action ){
     // Check action type
     switch( action.type ){
         case 'LOAD-POST':
@@ -9,6 +9,6 @@ export default function( state = null, action ){
             return state = action.value;
 
         default:
-            return state = null;
+            return state = [];
     }
 }

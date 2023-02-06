@@ -52,7 +52,7 @@ class HomeView extends Component{
   }
 
   displaySinglePost( event ){
-    this.props.navigate(`/single/${ event }`)
+    this.props.navigate(`/posts/${ event }`)
   }
 
   // Send AJAX request with Fetch API
@@ -101,10 +101,9 @@ class HomeView extends Component{
 
   // Dsiplay component
   render(){
-    if( this.props.connectedUser && this.props.postCollection ){
+    if( this.props.connectedUser && this.props.postCollection.length ){
       return(
         <div className='home-view-component'>
-          <p>Liste de post { this.props.connectedUser.length }</p>
           <ul>
             {
               this.props.postCollection.map( (item, idx) => {
