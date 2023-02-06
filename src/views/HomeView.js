@@ -39,6 +39,8 @@ class HomeView extends Component{
 
     // Bind this to methods
     this.displaySinglePost = this.displaySinglePost.bind( this );
+    this.onSubmit = this.onSubmit.bind( this );
+    this.ajaxGetMethod = this.ajaxGetMethod.bind( this );
   }
 
   displaySinglePost( event ){
@@ -46,8 +48,8 @@ class HomeView extends Component{
   }
 
   // Send AJAX request with Fetch API
-  loadPosts(){
-    fetch('https://jsonplaceholder.typicode.com/posts')
+  ajaxGetMethod( endpoint, from ){
+    fetch(`https://jsonplaceholder.typicode.com/${ endpoint }`)
     .then( requestStatus => {
       if( requestStatus.ok ){
         // Extract JSON value
@@ -56,12 +58,24 @@ class HomeView extends Component{
     })
     .then( fetchSuccess => {
       // Save values in store property
-      store.dispatch({
-        type: 'LOAD-POST',
-        value: fetchSuccess
-      })
+      if( from === 'loadPost' ){
+        store.dispatch({
+          type: 'LOAD-POST',
+          value: fetchSuccess
+        })
 
-      console.log(fetchSuccess)
+        console.log( this.props.connectedUser )
+        console.log( fetchSuccess )
+      }
+      else if( from === 'loginForm' ){
+        store.dispatch({
+          type: 'LOGIN-USER',
+          value: fetchSuccess[0]
+        })
+
+        // Load post collections
+        this.ajaxGetMethod(`posts?userId=${fetchSuccess[0].id}`, 'loadPost')
+      }
     })
     .catch( fetchError => {
       console.log('Error', fetchError)
@@ -70,15 +84,19 @@ class HomeView extends Component{
 
   // Bind form 'BaseForm' event 'submit'
   onSubmit( event ){
-    console.log( 'onSubmit', event )
+    // Send Ajax request to login user (fake)
+    this.ajaxGetMethod( 
+      `users?email=${ event.email }&username=${ event.username }`,
+      'loginForm'
+    )
   }
 
   // Dsiplay component
   render(){
-    if( this.props.postCollection ){
+    if( this.props.postCollection && this.props.connectedUser ){
       return(
         <div className='home-view-component'>
-          <p>Liste de post { this.props.postCollection.length }</p>
+          <p>Liste de post { this.props.connectedUser.length }</p>
           <ul>
             {
               this.props.postCollection.map( (item, idx) => {
@@ -113,7 +131,8 @@ class HomeView extends Component{
 // Bind store state in classe properties
 const mapStateToProps = state => {
   return{
-    postCollection: state.posts
+    connectedUser: state.user,
+    postCollection: state.posts,
   }
 }
 
