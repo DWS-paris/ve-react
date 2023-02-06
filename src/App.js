@@ -32,7 +32,7 @@ class App extends Component{
             {/* Route directive to define path and component */}
             <Route path="/" element={ <HomeView /> } />
             <Route path="/add" element={ <CreateView /> } />
-            <Route path="/single/:id" element={ <SingleView /> } />
+            <Route path="/:shema/:id" element={ <SingleView /> } />
           </Routes>
         </main>
 

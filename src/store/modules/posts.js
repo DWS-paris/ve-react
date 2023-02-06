@@ -5,7 +5,10 @@ export default function( state = null, action ){
         case 'LOAD-POST':
             return state = action.value;
 
+        case 'SINGLE-POST':
+            return state = action.value;
+
         default:
-            return state = [];
+            return state = null;
     }
 }
