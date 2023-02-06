@@ -15,11 +15,33 @@ class HeaderBase extends Component{
 
   // Dsiplay component
   render(){
-    return(
-      <header className='header-base-component'>
-        <h1>First React App</h1>
-      </header>
-    )
+    if( this.props.connectedUser ){
+      return(
+        <header className='header-base-component'>
+          <h1>Bienvenue { this.props.connectedUser.name }</h1>
+          <nav>
+            <ul>
+              <li>
+                <button 
+                  className='button is-small is-danger' 
+                  type='button'
+                  onClick={ () => this.props.onLogout() }
+                >
+                  Logout
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </header>
+      )
+    }
+    else{
+      return(
+        <header className='header-base-component'>
+          <h1>First React App</h1>
+        </header>
+      )
+    }
   }
 }
 

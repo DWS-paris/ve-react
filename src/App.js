@@ -10,20 +10,30 @@ import CreateView from "./views/CreateView";
 import SingleView from "./views/SingleView";
 import HeaderBase from './base/HeaderBase';
 import FooterBase from './base/FooterBase';
+import store from './store';
 
 // [CMP] Definition
 class App extends Component{
   // Init componenet
   constructor( props ){
     // Inject props from extended classe (ES6)
-    super(props)
+    super(props);
+  }
+
+  onLogout(){
+    store.dispatch({
+      type: 'LOGOUT-USER',
+      value: null
+    })
   }
 
   // Dsiplay component
   render(){
     return(
       <div className='app-component'>
-        <HeaderBase/>
+        <HeaderBase
+          onLogout={ this.onLogout }
+        />
 
         <main>
           {/* Routes directive to define routes */}

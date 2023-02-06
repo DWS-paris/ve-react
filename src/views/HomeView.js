@@ -37,6 +37,14 @@ class HomeView extends Component{
       }
     ]
 
+    if( this.props.connectedUser ){
+      // Send Ajax request to login user (fake)
+      this.ajaxGetMethod( 
+        `users?email=${ this.props.connectedUser.email }&username=${ this.props.connectedUser.username }`,
+        'loginForm'
+      )
+    }
+
     // Bind this to methods
     this.displaySinglePost = this.displaySinglePost.bind( this );
     this.onSubmit = this.onSubmit.bind( this );
@@ -93,7 +101,7 @@ class HomeView extends Component{
 
   // Dsiplay component
   render(){
-    if( this.props.postCollection && this.props.connectedUser ){
+    if( this.props.connectedUser && this.props.postCollection ){
       return(
         <div className='home-view-component'>
           <p>Liste de post { this.props.connectedUser.length }</p>
