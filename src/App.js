@@ -8,7 +8,8 @@ import { Routes, Route } from "react-router-dom"
 import HomeView from "./views/HomeView";
 import CreateView from "./views/CreateView";
 import SingleView from "./views/SingleView";
-
+import HeaderBase from './base/HeaderBase';
+import FooterBase from './base/FooterBase';
 
 // [CMP] Definition
 class App extends Component{
@@ -22,12 +23,10 @@ class App extends Component{
   render(){
     return(
       <div className='app-component'>
-        <header>
-          <h1>Hello react classe</h1>
-        </header>
+        <HeaderBase/>
 
         <main>
-          {/* Routes directive to define routes*/}
+          {/* Routes directive to define routes */}
           <Routes>
             {/* Route directive to define path and component */}
             <Route path="/" element={ <HomeView /> } />
@@ -36,9 +35,7 @@ class App extends Component{
           </Routes>
         </main>
 
-        <footer>
-          <p>Under WTFPL - Julien Noyer 2023</p>
-        </footer>
+        <FooterBase/>
       </div>
     )
   }

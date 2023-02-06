@@ -8,6 +8,7 @@ import store from "../store/index"
 
 // Child components
 import SinglePost from "../components/SinglePost"
+import BaseForm from '../base/BaseForm';
 
 // [CMP] Definition
 class HomeView extends Component{
@@ -22,7 +23,7 @@ class HomeView extends Component{
 
   componentDidMount(){
     // Load posts
-    this.loadPosts();
+    //this.loadPosts();
   }
 
   displaySinglePost( event ){
@@ -78,7 +79,9 @@ class HomeView extends Component{
     else{
       return(
         <div className='home-view-component'>
-          Chagement en cours..
+          <h1>Bienvenue, merci de vous connecter</h1>
+          <BaseForm
+          />
         </div>
       )
     }
