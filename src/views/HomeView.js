@@ -17,13 +17,28 @@ class HomeView extends Component{
     // Inject props from extended classe (ES6)
     super(props);
 
+    // Define login form value
+    this.loginFormValue = [
+      {
+        name: 'email',
+        type: 'email',
+        label: `Email de connexion`,
+        required: true,
+        min: 5,
+        max: null
+      },
+      {
+        name: 'username',
+        type: 'text',
+        label: `Identitiant de connexion`,
+        required: true,
+        min: 5,
+        max: null
+      }
+    ]
+
     // Bind this to methods
     this.displaySinglePost = this.displaySinglePost.bind( this );
-  }
-
-  componentDidMount(){
-    // Load posts
-    //this.loadPosts();
   }
 
   displaySinglePost( event ){
@@ -51,6 +66,11 @@ class HomeView extends Component{
     .catch( fetchError => {
       console.log('Error', fetchError)
     })
+  }
+
+  // Bind form 'BaseForm' event 'submit'
+  onSubmit( event ){
+    console.log( 'onSubmit', event )
   }
 
   // Dsiplay component
@@ -81,6 +101,8 @@ class HomeView extends Component{
         <div className='home-view-component'>
           <h1>Bienvenue, merci de vous connecter</h1>
           <BaseForm
+            content={ this.loginFormValue }
+            handleSubmit={ this.onSubmit }
           />
         </div>
       )
