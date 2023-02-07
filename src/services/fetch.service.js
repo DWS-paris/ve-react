@@ -18,7 +18,7 @@ class CrudFetchClass {
         }
 
         // Configurer les requêtes envoyant des données
-        if( ['POST', 'PUT'].indexOf( method ) !== -1 && body !== null ){
+        if( ['POST', 'PUT', 'PATCH'].indexOf( method ) !== -1 && body !== null ){
             // Définir le type de valeur
             this.requestOptions.headers = {
                 'Content-Type' : 'application/json'

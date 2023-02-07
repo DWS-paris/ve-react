@@ -4,23 +4,10 @@ import { withRouter } from '../services/withRouter';
 
 // Store modules
 import { connect } from "react-redux"
-import store from "../store/index"
 
 // Child components
 import BaseForm from '../base/BaseForm';
 import CrudFetchClass from '../services/fetch.service';
-
-/* 
-  Définir la vue CreateView
-  - connecter le composant avec le store
-  - importer le composant formulaire
-  - utiliser la valeur du paramètre ':scema' pour définir un formulaire
-    - POSTS
-    - TODOS
-  - afficher le fomulaire
-  - envoyer l'objet généré par la formulaire vers l'API
-*/
-
 
 // [CMP] Definition
 class CreateView extends Component{
@@ -29,6 +16,7 @@ class CreateView extends Component{
     // Inject props from extended classe (ES6)
     super(props)
 
+    // Init fetcher
     this.Fetcher = new CrudFetchClass();
 
     // Init form value
@@ -106,7 +94,7 @@ class CreateView extends Component{
 
   // Dsiplay component
   render(){
-    if( this.formValue ){
+    if( this.formValue && this.props.connectedUser ){
       return(
         <div className='create-view-component'>
           <h1>{ this.formTitle }</h1>
